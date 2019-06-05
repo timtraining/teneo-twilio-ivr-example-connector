@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "Mark Jones and Paul Broekhof",
+  "author": "Artificial Solutions",
   "license": "Apache-2.0",
   "dependencies": {
     "@artificialsolutions/tie-api-client": "^1.3.1",
