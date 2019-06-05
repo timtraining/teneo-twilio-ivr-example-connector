@@ -1,0 +1,26 @@
+{
+    "name": "twilio-voice-teneo-training",
+    "description": "A Teneo bot connector for the Twilio Voice.",
+    "keywords": [
+        "bot",
+        "Twilio",
+        "Teneo",
+        "Voice",
+		"IVR"
+    ],
+    "repository": "https://github.com/timtraining/teneo-twilio-ivr-example-connector",
+    "env": {    
+        "TENEO_ENGINE_URL": {
+            "description": "Please input your Teneo Engine URL. https://some.engine/instance/",
+            "required":true
+        }, 
+        "LANGUAGE_STT": {
+            "description": "Please enter your Twilio Language for voice recognition (STT).  Defaults to 'en-US'. List is here: https://www.twilio.com/docs/voice/twiml/gather#languagetags",
+            "required":false
+        },        
+        "LANGUAGE_TTS": {
+            "description": "Please enter your Twilio Language for spoken voice (TTS).  Defaults to 'Polly.Joanna'. Use "Polly.Lotte" for Dutch. List is here: https://www.twilio.com/docs/voice/twiml/say/text-speech#amazon-polly",
+            "required":false
+        }
+    }
+}
