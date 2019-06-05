@@ -38,7 +38,7 @@ If you want to run the connector locally, follow the steps below. If you have al
     ```
     npm install
     ``` 
-3. Create a `.env` file in the folder where you stored the source and add the URL of your engine. Optionally you can also specify the langauges for Speech To Text and Text To Speech:
+3. Create a `.env` file in the folder where you stored the source and add the URL of your engine. Optionally you can also specify the langauges for Speech To Text and Text To Speech. For Dutch, the LANGUAGE_TTS should be Polly.Lotte.
     ```
     TENEO_ENGINE_URL=<your_engine_url>
     LANGUAGE_STT=en-US
@@ -79,3 +79,9 @@ By default, end of speech is detected automatically. The `twilio_customTimeout` 
 
 ### twilio_endCall
 If the output parameter `twilio_endCall` with the value `true` exists, the call will be ended.
+
+### twilio_speechModel
+If the output parameter 'twilio_speechModel' exists, it will be used to set a custom speech model. Allowed values are: 'default', 'numbers_and_commands' and 'phone_call'.
+
+### twilio_inputType
+If the output parameter 'twilio_inputType' exists, it will be used to set a custom input type. Allowed values are: 'dtmf', 'speech' or 'dtmf speech'. DTMF allows the end user to enter a number using the keypad of the phone. User must press # to mark end of the input. 

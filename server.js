@@ -68,6 +68,16 @@ function handleTwilioMessages(sessionHandler) {
 
       // check if we have stored an engine sessionid for this caller
       const teneoSessionId = sessionHandler.getSession(callSid);
+	  
+	  // PABO: check for Digits field
+	  let digitsCaptured = '';
+	  try {
+		  digitsCaptured = String(post.Digits);
+	  } catch (error) {
+		  // no need to do anything, but you could do this:
+		  console.error(error);
+		  console.log('No digits captured');
+	  }
 
       // get transcipt of user's spoken response
       let userInput = '';
@@ -77,7 +87,7 @@ function handleTwilioMessages(sessionHandler) {
       console.log(`userInput: ${userInput}`);
 
       // send input to engine using stored sessionid and retreive response
-      const teneoResponse = await teneoApi.sendInput(teneoSessionId, { 'text': userInput, 'channel': 'twilio' });
+      const teneoResponse = await teneoApi.sendInput(teneoSessionId, { 'text': userInput, 'channel': 'twilio', 'digits': digitsCaptured});
       console.log(`teneoResponse: ${teneoResponse.output.text}`)
 
       // store engine sessionid for this caller
@@ -110,7 +120,22 @@ function sendTwilioMessage(teneoResponse, res) {
   if (teneoResponse.output.parameters.twilio_customTimeout) {
     customTimeout = teneoResponse.output.parameters.twilio_customTimeout;
   }
+  
+// PABO trying to fix number recognition
+  // If the output parameter 'twilio_speechModel' exists, it will be used to set a custom speech model. Allowed values are: 'default', 'numbers_and_commands' and 'phone_call'.
+  var customSpeechModel = 'default';
+  if (teneoResponse.output.parameters.twilio_speechModel) {
+    customSpeechModel = teneoResponse.output.parameters.twilio_speechModel;
+  }  
 
+// PABO trying to fix number recognition - part 2
+  // If the output parameter 'twilio_inputType' exists, it will be used to set a custom input type. Allowed values are: 'dtmf', 'speech' or 'dtmf speech'  
+  var customInputType = 'speech';
+  if (teneoResponse.output.parameters.twilio_inputType) {
+    customInputType = teneoResponse.output.parameters.twilio_inputType;
+  }  
+
+  
   // If the output parameter 'twilio_endCall' exists, the call will be ended
   if (teneoResponse.output.parameters.twilio_endCall == 'true') {
     response = twiml.hangup();
@@ -118,9 +143,12 @@ function sendTwilioMessage(teneoResponse, res) {
     response = twiml.gather({
       language: language_STT,
       hints: customVocabulary,
-      input: 'speech',
-      speechTimeout: customTimeout
+	  input: customInputType,
+      speechTimeout: customTimeout,
+	  speechModel: customSpeechModel,
+	  actionOnEmptyResult : 'true'
     });
+	
 
     response.say({
       voice: language_TTS
