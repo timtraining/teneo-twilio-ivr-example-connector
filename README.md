@@ -1,4 +1,4 @@
-# tie-api-example-twilio-ivr
+# teneo-twilio-ivr-example-connector
 This example connector allows you to establish a phone call with a Teneo bot. The connector makes your Teneo bot available via Twilio IVR (Interactive Voice Response). This guide will take you through the steps of setting a new Twilio phone number and deploying the connector to respond to events sent by Twilio.
 
 
@@ -10,23 +10,7 @@ When running the connector locally, making the connector available via https is 
 Your bot needs to be published and you need to know the engine url.
 
 ## Setup instructions
-Below you will find two ways to run the this connector. The first way is by [running the connector on Heroku](#running-the-connector-on-heroku). This is the easiest to get the connector running for non-developers since it does not require you to run node.js or download or modify any code.
-
-The second way is to [run the connector locally](#running-the-connector-locally) or to deploy it on a server of your choice. This preferred if you're familiar with node.js development and want to have a closer look at the code and plan to enhance or modify it.
-
-### Running the connector on Heroku
-Click the button below to deploy the connector to Heroku:
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg?classes=heroku)](https://heroku.com/deploy?template=https://github.com/artificialsolutions/tie-api-example-twilio-ivr)
-
-In the 'Config Vars' section, add the following:
-* **TENEO_ENGINE_URL:** The engine url of your bot
-
-Optionally, you can also add the following parameters:
-* **LANGUAGE_STT:** Speech to Text language. Defaults to en-US if not provided. For a list of supported languages, see: [https://www.twilio.com/docs/voice/twiml/gather#languagetags](https://www.twilio.com/docs/voice/twiml/gather#languagetags). Note that your Teneo solution should match the chosen language as well.
-* **LANGUAGE_TTS:** Text to Speech language. Defaults to en-US if not provided. For a list of supported languages, see: [https://www.twilio.com/docs/voice/twiml/say/text-speech#amazon-polly](https://www.twilio.com/docs/voice/twiml/say/text-speech#amazon-polly). Note that your Teneo solution should match the chosen language as well.
-
-Next, follow the [Setup a Twilio phone number](#setup-a-twilio-phone-number) instructions. Make sure that in step 6 you set the <mark>Webhook</mark> to the url of the Heroku app.
+Below you will find instructions to [run the connector locally](#running-the-connector-locally) or to deploy it on a server of your choice. This preferred if you're familiar with node.js development and want to have a closer look at the code and plan to enhance or modify it.
 
 ### Running the connector locally
 If you want to run the connector locally, follow the steps below. If you have already followed the instructions above to deploy the connector on Heroku, you can skip this section and jump straight to [Setup a Twilio phone number](#setup-a-twilio-phone-number).
@@ -81,7 +65,7 @@ By default, end of speech is detected automatically. The `twilio_customTimeout` 
 If the output parameter `twilio_endCall` with the value `true` exists, the call will be ended.
 
 ### twilio_speechModel
-If the output parameter 'twilio_speechModel' exists, it will be used to set a custom speech model. Allowed values are: 'default', 'numbers_and_commands' and 'phone_call'.
+If the output parameter `twilio_speechModel` exists, it will be used to set a custom speech model. Allowed values are: 'default', 'numbers_and_commands' and 'phone_call'.
 
 ### twilio_inputType
-If the output parameter 'twilio_inputType' exists, it will be used to set a custom input type. Allowed values are: 'dtmf', 'speech' or 'dtmf speech'. DTMF allows the end user to enter a number using the keypad of the phone. User must press # to mark end of the input. 
+If the output parameter `twilio_inputType` exists, it will be used to set a custom input type. Allowed values are: 'dtmf', 'speech' or 'dtmf speech'. DTMF allows the end user to enter a number using the keypad of the phone. User must press # to mark end of the input. 
