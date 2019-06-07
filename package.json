@@ -1,4 +1,8 @@
 {
+  "repository": {
+  "type": "git",
+  "url": "git://github.com/timtraining/teneo-twilio-ivr-example-connector.git"
+  },
   "version": "1.1.0",
   "description": "A basic example of using Teneo and Twilio voice",
   "main": "server.js",
